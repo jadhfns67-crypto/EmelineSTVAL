@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pour ma chérie ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(180deg, #ffdde1, #ee9ca7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* PLUIE DE COEURS */
+.heart {
+  position: fixed;
+  top: -10px;
+  color: rgba(255,105,180,0.5);
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+@keyframes fall { to { transform: translateY(110vh); } }
+
+.screen {
+  position: relative;
+  z-index: 10;
+  background: rgba(255,255,255,0.95);
+  padding: 40px;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+.hidden { display: none; }
+
+h1 { font-size: 2.4rem; margin-bottom:10px; }
+h2 { font-size: 2rem; margin-bottom:20px; }
+p  { font-size: 1.2rem; margin-bottom:10px; }
+
+#gift {
+  font-size: 90px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+#gift:hover { transform: scale(1.15); }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top:20px;
+}
+button {
+  font-size: 1.3rem;
+  padding: 15px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Quicksand', sans-serif;
+}
+#yes { background: #ff4d6d; color:white; }
+#no  { background: #ffd6dc; }
+
+.final-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 15px;
+}
+.icon-btn {
+  width: 130px;
+  height: 130px;
+  border-radius: 30px;
+  background: #fff0f5;
+  font-size: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon-btn span { font-size: 1rem; margin-top:5px; }
+
+#letter-content {
+  width: 98%;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fffaf0;
+  padding: 25px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  text-align: justify;
+  margin: auto;
+}
+
+#compliment-list, #surprise-text {
+  max-height: 50vh;
+  overflow-y: auto;
+  background: #fffaf0;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  font-size:1.1rem;
+  line-height:1.4;
+  text-align:left;
+}
+
+.screen button.return-btn {
+  margin-top: 20px;
+  background: #ff4d6d;
+  color:white;
+  font-size:1.2rem;
+  padding:12px 25px;
+  border-radius:25px;
+  border:none;
+  cursor:pointer;
+}
+
+.animated-heart {
+  position: absolute;
+  font-size: 25px;
+  opacity: 0;
+  transform: scale(0);
+  animation: pop-heart 0.6s forwards;
+}
+@keyframes pop-heart {
+  0% { opacity:0; transform:scale(0); }
+  50% { opacity:1; transform:scale(1.5); }
+  100% { opacity:0; transform:scale(1); }
+}
+
+/* ÉCRAN VERROUILLAGE */
+#lock-screen {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: linear-gradient(180deg, #f8bbd0, #f06292);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 9999;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+  padding:20px;
+}
+#lock-screen h1 { font-size:2.5rem; margin-bottom:20px;}
+#countdown { font-size:2rem; margin-top:15px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<!-- ÉCRAN DE VERROUILLAGE -->
+<div id="lock-screen">
+  <h1>💖 Patiente un peu 💖</h1>
+  <p>Le site sera disponible bientôt !</p>
+  <div id="countdown">00:00:00</div>
+</div>
+
+<!-- PLUIE DE COEURS -->
+<script>
+for(let i=0;i<35;i++){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=15+Math.random()*25+"px";
+  h.style.animationDuration=5+Math.random()*6+"s";
+  document.body.appendChild(h);
+}
+</script>
+
+<!-- ÉCRANS -->
+<div class="screen hidden" id="gift-screen">
+  <h1>Coucou babe 💕</h1>
+  <p>J’ai un cadeau pour toi<br>Appuie pour l’ouvrir 🎁</p>
+  <div id="gift">🎁</div>
+</div>
+
+<div class="screen hidden" id="valentine-screen">
+  <h2>Pour ma chérie ❤️</h2>
+  <p>Veux-tu être ma Valentine ?</p>
+  <div class="buttons">
+    <button id="yes">Oui ❤️</button>
+    <button id="no">Non...</button>
+  </div>
+  <p id="counter">0 / 10</p>
+  <p id="no-text"></p>
+</div>
+
+<div class="screen hidden" id="final-screen">
+  <h2>J’ai quelque chose pour toi 💖</h2>
+  <div class="final-buttons">
+    <div class="icon-btn" id="letter-btn">💌<span>Lettre</span></div>
+    <div class="icon-btn" id="compliment-btn">💬<span>Compliments</span></div>
+    <div class="icon-btn" id="surprise-btn">💖<span>Surprise</span></div>
+  </div>
+</div>
+
+<div class="screen hidden" id="letter-screen">
+  <h2>💌 Ma lettre pour toi 💌</h2>
+  <div id="letter-content">
+    <p>Mon amour,</p>
+    <p>Le 02 novembre, je t’ai écrit pour la première fois. Un message simple, mais qui a marqué le début de quelque chose de très important pour moi. Depuis ce jour-là, parler avec toi est devenu naturel, évident, indispensable. Et aujourd’hui, ça fait déjà presque un mois que tu es ma copine… et franchement, ce mois a compté plus que tu ne peux l’imaginer.</p>
+    <p>Ce que j’aime chez toi, ce n’est pas juste une chose. C’est tout ce que tu es. Ta façon d’être, de parler, de rire, ta manière de voir la vie. Tu as une douceur incroyable, mais aussi une vraie force, et je t’admire énormément pour ça.</p>
+    <p>Je veux que tu saches à quel point je suis fier de toi. Fier de tous les efforts que tu fais pour toi-même, que ce soit dans ta vie personnelle ou professionnellement. Tu te donnes à fond, tu avances, tu te remets en question, et même si tu ne t’en rends pas toujours compte, c’est vraiment beau à voir. Tu m’impressionnes.</p>
+    <p>Avec toi, je me sens incroyablement bien. Vraiment. Tu m’apaises, tu me fais sourire sans effort, tu rends mes journées meilleures juste par ta présence. Tu es devenue la personne avec qui j’ai envie de tout partager : mes joies, mes doutes, mes moments simples comme les plus importants. Avec toi, le temps passe trop vite, mais j’ai toujours envie d’en avoir encore plus.</p>
+    <p>En seulement un mois officiellement, tu as pris une place énorme dans ma vie. Et ce que j’aime le plus, c’est que tout s’est fait naturellement. Ce que je ressens pour toi est sincère, réel, et de plus en plus fort chaque jour. J’ai envie de continuer à te découvrir, de construire des souvenirs avec toi, de te faire rire quand tu en as besoin et d’être là pour toi, quoi qu’il arrive.</p>
+    <p>Pour cette Saint-Valentin, je voulais simplement que tu saches une chose : tu comptes énormément pour moi. Et chaque jour passé à tes côtés me confirme que ce message du 02 novembre a été le début de quelque chose de précieux.</p>
+    <p>Merci d’être toi. Merci d’être entrée dans ma vie. Et je suis persuadé, mon cœur que cette première saint valentin n’est que le début d’une très belle histoire entre nous.</p>
+    <p>Je t’aime Emeline.</p>
+  </div>
+  <button class="return-btn" id="back-final-letter">Retour aux choix</button>
+</div>
+
+<div class="screen hidden" id="compliment-screen">
+  <h2>💬 Compliments et vérités pour toi </h2>
+  <div id="compliment-list">
+    <p>Tu es incroyablement douce.</p>
+    <p>Ton sourire illumine mes journées.</p>
+    <p>Ta force mentale m’impressionne.</p>
+    <p>Tu rends tout plus joyeux autour de toi.</p>
+    <p>Y'en a pas deux comme toi.</p>
+    <p>Tu es unique et merveilleuse.</p>
+    <p>Tes yeux sont si envoûtants.</p>
+    <p>Ton ventre, je pourrais l’embrasser à vie avec cette chaleur naturellement attirante.</p>
+    <p>Tes mains sont si réconfortantes et délicates.</p>
+    <p>Ta taille est si élégante.</p>
+    <p>Tes lèvres, je pourrais y rester pendant des heures (toutes les lèvres &lt;3).</p>
+    <p>Tout est mieux quand c’est avec toi.</p>
+    <p>Chaque fois que je te regarde, je tombe de plus en plus amoureux de toi.</p>
+    <p>Ta façon de penser est incroyable, tu es si courageuse et tu te donnes les moyens d’y arriver.</p>
+    <p>Tu n’es pas seule à te battre tous les jours, sache que je suis là pour toi et que je le serai toujours.</p>
+    <p>T’es la fille inaccessible qui calcule pas les autres gadjo que je voulais, tu as tout ce que je veux.</p>
+    <p>Sache qu’il n’y a que toi et qu’il y aura toujours que toi, car je suis amoureux de toi Emeline.</p>
+  </div>
+  <button class="return-btn" id="back-final-compliment">Retour aux choix</button>
+</div>
+
+<div class="screen hidden" id="surprise-screen">
+  <div id="surprise-text">
+    <p>En fait y’a pas de surprise mais j’ai trop hâte de te voir 💖</p>
+    <p>Prends une photo de toi avec l’écran une fois que t’as tout fini ! </p>
+  </div>
+  <button class="return-btn" id="back-final-surprise">Retour aux choix</button>
+</div>
+
+<script>
+// Gestion des écrans
+const giftScreen=document.getElementById("gift-screen");
+const valentineScreen=document.getElementById("valentine-screen");
+const yesBtn=document.getElementById("yes");
+const noBtn=document.getElementById("no");
+const finalScreen=document.getElementById("final-screen");
+const letterBtn=document.getElementById("letter-btn");
+const letterScreen=document.getElementById("letter-screen");
+const complimentScreen=document.getElementById("compliment-screen");
+const surpriseScreen=document.getElementById("surprise-screen");
+
+let yesCount=0;
+let noStep=0;
+const noPhrases=["T'es vraiment sûre ?", "J’vais te faire bouffer des carottes", "T’as déclaré la guerre là"];
+
+document.getElementById("gift").addEventListener("click",()=>{
+  giftScreen.classList.add("hidden");
+  valentineScreen.classList.remove("hidden");
+});
+
+yesBtn.addEventListener("click",()=>{
+  yesCount++;
+  document.getElementById("counter").textContent=`${yesCount} / 10`;
+  yesBtn.style.transform="scale(1.05)";
+  setTimeout(()=>{yesBtn.style.transform="scale(1)";},200);
+  if(yesCount>=10){
+    valentineScreen.classList.add("hidden");
+    finalScreen.classList.remove("hidden");
+  }
+});
+
+noBtn.addEventListener("click",()=>{
+  if(noStep<noPhrases.length){
+    noBtn.textContent=noPhrases[noStep];
+    noStep++;
+    yesBtn.style.transform="scale(1.2)";
+  }
+});
+
+// Boutons finaux
+letterBtn.addEventListener("click",()=>{ finalScreen.classList.add("hidden"); letterScreen.classList.remove("hidden"); });
+document.getElementById("compliment-btn").addEventListener("click",()=>{ finalScreen.classList.add("hidden"); complimentScreen.classList.remove("hidden"); });
+document.getElementById("surprise-btn").addEventListener("click",()=>{ finalScreen.classList.add("hidden"); surpriseScreen.classList.remove("hidden"); });
+
+// Retours aux choix
+document.getElementById("back-final-letter").addEventListener("click",()=>{ letterScreen.classList.add("hidden"); finalScreen.classList.remove("hidden"); });
+document.getElementById("back-final-compliment").addEventListener("click",()=>{ complimentScreen.classList.add("hidden"); finalScreen.classList.remove("hidden"); });
+document.getElementById("back-final-surprise").addEventListener("click",()=>{ surpriseScreen.classList.add("hidden"); finalScreen.classList.remove("hidden"); });
+
+// COMPTE A REBOURS jusqu'à 20h
+const lockScreen=document.getElementById("lock-screen");
+const countdownEl=document.getElementById("countdown");
+const now=new Date();
+let unlockDate=new Date(now.getFullYear(),now.getMonth(),now.getDate(),20,0,0);
+
+function updateCountdown(){
+  const now=new Date();
+  let diff=unlockDate-now;
+  if(diff<=0){ lockScreen.style.display="none"; giftScreen.classList.remove("hidden"); return; }
+  const hours=Math.floor(diff/(1000*60*60));
+  diff-=hours*1000*60*60;
+  const minutes=Math.floor(diff/(1000*60));
+  diff-=minutes*1000*60;
+  const seconds=Math.floor(diff/1000);
+  countdownEl.textContent=`${hours}h ${minutes}m ${seconds}s`;
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+</script>
+</body>
+</html>
+
+
+
